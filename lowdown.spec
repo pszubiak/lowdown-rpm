@@ -4,7 +4,9 @@ Release:        1%{?dist}
 Summary:        Simple markdown translator
 License:        ICS
 URL:            https://kristaps.bsd.lv/lowdown/
+%undefine       _disable_source_fetch
 Source0:        https://github.com/kristapsdz/lowdown/archive/refs/tags/VERSION_0_8_6.tar.gz
+%define         SHA256SUM0 79577279cf125cdb7b8e88c2e94b2ce01e3ec1e84623bdb6f40997a3bf1a1b9c
 
 BuildRequires:  gcc
 BuildRequires:  make
@@ -27,6 +29,7 @@ For details about the programming API, please see the docs
 on the project's site (https://kristaps.bsd.lv/lowdown/)
 
 %prep
+echo "%SHA256SUM0  %SOURCE0" | sha256sum -c -
 %setup -n %{name}-VERSION_0_8_6
 
 %build
@@ -53,5 +56,3 @@ chmod -R u+w $RPM_BUILD_ROOT
 %{_mandir}/man5/*
 
 %changelog
-* Thu Aug 22 2021 Piotr Szubiakowski - 0.8.6-1
-- Initial build.
