@@ -1,6 +1,6 @@
 Name:           lowdown
 Version:        0.8.6
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Simple markdown translator
 License:        ICS
 URL:            https://kristaps.bsd.lv/lowdown/
@@ -33,7 +33,7 @@ echo "%SHA256SUM0  %SOURCE0" | sha256sum -c -
 %setup -n %{name}-VERSION_0_8_6
 
 %build
-export CFLAGS='%{build_cflags}'
+export CFLAGS='%{build_cflags} -fPIC'
 export LDFLAGS='%{build_ldflags}'
 ./configure PREFIX=%{_prefix} LIBDIR=%{_libdir} MANDIR=%{_mandir}
 %make_build
@@ -56,3 +56,8 @@ chmod -R u+w $RPM_BUILD_ROOT
 %{_mandir}/man5/*
 
 %changelog
+* Thu Feb 12 2021 Piotr Szubiakowski - 0.8.6-2
+- add -fPIC flag
+
+* Thu Feb 12 2021 Piotr Szubiakowski - 0.8.6-1
+- init
